@@ -1,0 +1,58 @@
+
+/***************************************************
+Chat Structure
+****************************************************/
+
+#container {
+    width: 900px;
+    height: 525;
+    margin: 0 auto;
+
+    background-color: #2f96b4;
+}
+
+#emoe-list-container__left {
+    width: 200px;
+    height: 525px;
+    float: left;
+
+    background-color: #515151;
+}
+#emoe-list-container__right {
+    width: 200px;
+    height: 525px;
+    float: left;
+
+    background-color: #515151;
+}
+#chat-container {
+    width: 500px;
+    height: 525px;
+    float: left;
+
+    background-color: #d3d3d3;
+    position: relative;
+}
+
+#chat-window {
+    width: 90%;
+    height: 275px;
+
+    margin: 25px auto 0;
+    background-color: #ffffff;
+}
+
+#chat-interface {
+    width: 100%;
+    height: 200px;
+
+    background-color: #8d8d8d;
+    position: absolute;
+    bottom: 0;
+}
+
+
+/***************************************************
+Interface Area
+****************************************************/
+
