@@ -17,21 +17,59 @@
 
         <div id="container">
             <div id="emoe-list-container__left">
-
-            </div>
-            <div id="chat-container">
-                <div id="chat-window">
-
-                </div>
-                <div id="chat-interface">
-                    <textarea></textarea>
-                    <div class="button-cluster">
-
+                <h3>Your Emoes</h3>
+                <div class="emoe-list">
+                    <div class="emoe">
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-name">Happy</span>
                     </div>
                 </div>
             </div>
-            <div id="emoe-list-container__right">
+            <div id="chat-container">
+                <div id="chat-window">
+                    <div class="message yours">
+                        <span class="name">You</span>
+                        <div class="message-container">
+                            <span class="emoe-color happy"></span><span class="emoe-color happy"></span>
+                            <span class="message-text">This is a message</span>
+                        </div>
+                    </div>
 
+                    <div class="message theirs">
+                        <span class="name">HAL 2000</span>
+                        <div class="message-container">
+                            <span class="emoe-color happy"></span>
+                            <span class="message-text">This is a message</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="chat-interface">
+                    <textarea class="chat-textarea" placeholder="Type Message Here"></textarea>
+                    <div class="button-cluster">
+                        <button class="emoe-attach"></button>
+                        <button class="chat-lock lock"></button>
+                        <button class="message-send">SEND</button>
+                    </div>
+                    <span class="to-attach">
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-color happy"></span>
+                    </span>
+                </div>
+            </div>
+            <div id="emoe-list-container__right">
+                <h3>Their Emoes</h3>
+                <div class="emoe-list">
+                    <div class="emoe">
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-name">Happy</span>
+                    </div>
+                    <div class="emoe">
+                        <span class="emoe-color happy"></span>
+                        <span class="emoe-name">Happy</span>
+                    </div>
+                </div>
             </div>
         </div>
 

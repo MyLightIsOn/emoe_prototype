@@ -9,6 +9,7 @@ Chat Structure
     margin: 0 auto;
 
     background-color: #2f96b4;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #emoe-list-container__left {
@@ -56,3 +57,145 @@ Chat Structure
 Interface Area
 ****************************************************/
 
+.chat-textarea {
+    width: 300px;
+    height: 100px;
+    display: bl;
+    float: left;
+
+    margin: 20px 0 0 20px;
+    position: relative;
+}
+
+.to-attach {
+    width: 300px;
+    height: 40px;
+    display: block;
+    float: left;
+
+    background-color: #fff;
+    margin: 32px 0 0 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.to-attach:before {
+    content: 'Emoes attached to this message';
+    position: absolute;
+    top: -17px;
+    left: 0px;
+    font-size: 12px;
+}
+
+.button-cluster {
+    width: 140px;
+    height: 140px;
+    float: right;
+
+    margin: 20px 20px 0 0;
+}
+
+.emoe-attach,.chat-lock {
+    width: 60px;
+    height: 60px;
+
+    cursor: pointer;
+}
+
+.emoe-attach {
+    background: url('../img/attach.png') no-repeat center #ffffff;
+}
+
+.lock{
+    background: url('../img/lock.png') no-repeat center #ffffff;
+}
+
+.unlock {
+    background: url('../img/unlock.png') no-repeat center #ffffff;
+}
+
+button:hover {
+    background-color: lightgreen;
+}
+
+.message-send {
+    width: 125px;
+    height: 60px;
+
+    margin: 10px 0 0 0;
+
+    cursor: pointer;
+}
+
+/***************************************************
+Emoes Attachment Areas
+****************************************************/
+
+#emoe-list-container__left h3, #emoe-list-container__right h3{
+    margin: 10px auto 10px;
+
+    color: #ffffff;
+    text-align: center;
+}
+
+.emoe-list {
+    width: 90%;
+    height: 90%;
+
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+.emoe {
+    padding: 5px 10px;
+    float: left;
+    width: 100%;
+}
+
+.emoe-color {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.emoe-name {
+    display: block;
+    float: right;
+}
+
+/***************************************************
+Chat Styles
+****************************************************/
+.message {
+    width: 100%;
+    float: left;
+
+    padding: 5px 10px;
+}
+
+.yours {
+    background-color: #e3f0f6;
+}
+
+.name {
+    width: 100%;
+
+    font-weight: bold;
+    font-size: 11px;
+    float: left;
+}
+
+.message-container {
+    width: 100%;
+    float: left;
+}
+/***************************************************
+Emoe List
+****************************************************/
+
+.happy {
+    background-color: blue;
+}
