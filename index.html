@@ -10,6 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/myStyles.css">
     </head>
@@ -24,6 +25,7 @@
                         <span class="emoe-name">Happy</span>
                     </div>
                 </div>
+                <button class="create-emoe">+ Create Emoe</button>
             </div>
             <div id="chat-container">
                 <div id="chat-window">
@@ -73,8 +75,56 @@
             </div>
         </div>
 
+        <div class="emoe-attach-modal hidden">
+            <div class="emoe-attach-title">Happy</div>
+            <div class="emoe-container">
+                <span class="emoe-color happy"></span>
+                <span class="emoe-level emoe-level-set"></span>
+            </div>
+
+            <div class="slider"></div>
+            <div class="button-container">
+                <button class="save">Save</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+
+        <div class="emoe-create-modal hidden">
+            <div class="emoe-attach-title">Create Emoe</div>
+            <input placeholder="Enter Emoe Name Here">
+            <table>
+                <tr>
+                    <th colspan="4">Select Your Emoe Color:</th>
+                </tr>
+                <tr>
+                    <td><span class="emoe-color blue"></span></td>
+                    <td><span class="emoe-color red"></span></td>
+                    <td><span class="emoe-color lime"></span></td>
+                    <td><span class="emoe-color light-blue"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="emoe-color brown"></span></td>
+                    <td><span class="emoe-color orange"></span></td>
+                    <td><span class="emoe-color gray"></span></td>
+                    <td><span class="emoe-color green"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="emoe-color turquoise"></span></td>
+                    <td><span class="emoe-color purple"></span></td>
+                    <td><span class="emoe-color yellow"></span></td>
+                    <td><span class="emoe-color pink"></span></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button class="save">Save</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+
+        <div id="modal-overlay" class="hidden"></div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <script src="js/vendor/bootstrap.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
