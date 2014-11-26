@@ -1,8 +1,11 @@
 $(function() {
-    var overlay = $('#modal-overlay'),              //Overlay
-        emoeSlider = $('.slider'),                  //Slider
-        emoeAttachModal = $('.emoe-attach-modal'),  //Attach Modal
-        emoeCreateModal = $('.emoe-create-modal');
+    var overlay = $('#modal-overlay'),                  //Overlay
+        emoeSlider = $('.slider'),                      //Slider
+        emoeAttachModal = $('.emoe-attach-modal'),      //Attach Modal
+        emoeCreateModal = $('.emoe-create-modal'),      //Create Modal
+        selectedColor = {},                             //The selected color from the emoe create modal
+        createdEmoeName = {},                           //The assigned name from the emoe create modal
+        yourEmoeList = $('.yoursEmoes');
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -13,7 +16,7 @@ $(function() {
     }
 
     //Opens Emoe Attach Modal
-    function emoeAttach(){
+    function emoeAttachClick(){
         $(emoeAttachModal).css({
             zIndex: 11
         });
@@ -21,12 +24,40 @@ $(function() {
     }
 
     //Opens Emoe Create Modal
-    function emoeCreate(){
+    function emoeCreateClick(){
+
+        //Unhides Modal
         $(emoeCreateModal).css({
             zIndex: 11
         });
         $(emoeCreateModal).removeClass('hidden');
+
+        //Gets the Emoe selected color
+        $('.emoe-create-modal td').click(function(){
+
+            //Iterates through all TDs and removes the select class (Removes Highlight)
+            $('.emoe-create-modal td').each(function(){
+                if($(this).hasClass('select')){
+                    $(this).removeClass('select')
+                }
+            });
+
+            //Highlights selected color
+            $(this).addClass('select');
+
+            //Sets selected color
+            selectedColor = $(this).children();
+        });
     }
+
+    //Saves created Emoe and adds it to your list
+    $('.save-create').click(function(){
+        createdEmoeName = $('.emoe-create-name').val();
+        $(yourEmoeList).append('<div class="emoe just-created"><span class="emoe-name">' + createdEmoeName + '</span> </div>');
+        $(selectedColor).clone().appendTo('.just-created');
+        $('.emoe').removeClass('just-created');
+        console.log(selectedColor)
+    });
 
     //Closes Modals
     function closeModal(){
@@ -60,16 +91,17 @@ $(function() {
         })
     });
 
+
     //Attach Modal
     $('.emoe-attach').on('click', function(){
         modalOverlay();
-        emoeAttach();
+        emoeAttachClick();
     });
 
     //Attach Modal
     $('.create-emoe').on('click', function(){
         modalOverlay();
-        emoeCreate();
+        emoeCreateClick();
     });
 
     //Close Modals

@@ -61,6 +61,7 @@ Chat Structure
 
     margin: 25px auto 0;
     background-color: #ffffff;
+    overflow-y: scroll;
 }
 
 #chat-interface {
@@ -332,6 +333,7 @@ Emoe Create Modal
 }
 
 .emoe-create-modal table td {
+    cursor: pointer;
     padding: 10px;
 }
 
