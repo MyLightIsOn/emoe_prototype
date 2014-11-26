@@ -167,9 +167,16 @@ Emoes Attachment Areas
     background-color: #ffffff;
 }
 .emoe {
+    width: 100%;
+
     padding: 5px 10px;
     float: left;
-    width: 100%;
+
+    cursor: pointer;
+}
+
+.emoe:hover {
+    background-color: #d3d3d3;
 }
 
 .emoe-container {
