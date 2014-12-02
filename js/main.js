@@ -9,7 +9,8 @@ $(function() {
         emoeLevelSet = {},                              //Level Set of Current Emoe
         emoeColorAttachSelect = {},                     //Color of Emoe selected from attach modal
         emoeNameAttachSelect = {},                      //Name of Emoe selected from attach modal
-        emoeToAttachArea = $('.to-attach');             //Emoes that will be attached to the message
+        emoeToAttachArea = $('.to-attach'),             //Emoes that will be attached to the message
+        chatTextarea = $('.chat-textarea');             //Message to send area
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -83,14 +84,35 @@ $(function() {
     }
 
     //Saves edited emoe and adds it to the "Emoes to Attach" section
-    $('.save-attach').on('click', function(){
-
+    function addEmoesToCue(){
         $('.to-attach').append('<div class="emoe-container new-container"></div>');
 
         var newContainer = $('.new-container');
         $(newContainer).append($('.emoe-to-attach').html());
         $(newContainer).find('.emoe-level-set').removeClass('emoe-level-set');
         $(newContainer).removeClass('new-container');
+    }
+
+    //Sends message from text message area
+    function sendMessage(){
+        var newMessage = $(chatTextarea).val();
+        $('#chat-window').append('<div class="message newest-message"><span class="name">You</span></div>');
+        var newContainer = $('.newest-message').append('<div class="message-container"></div>');
+        $(newContainer).append($(emoeToAttachArea).html());
+        $(newContainer).append('<span class="message-text">' + newMessage + '</span>');
+
+        $(newContainer).removeClass('newest-message');
+        $(emoeToAttachArea).html('');
+        $(chatTextarea).val('');
+    }
+
+    $('.message-send').click(function(){
+        sendMessage();
+    });
+
+    //Saves emoes from attach modal
+    $('.save-attach').on('click', function(){
+        addEmoesToCue();
     });
 
 
@@ -115,7 +137,7 @@ $(function() {
     });
 
     //Opens Attach Modal
-    $('.yoursEmoes').on('dblclick', '.emoe', function(){
+    $(yourEmoeList).on('dblclick', '.emoe', function(){
         emoeColorAttachSelect = $(this).find('.emoe-color');
         emoeNameAttachSelect = $(this).find('.emoe-name').text();
 
