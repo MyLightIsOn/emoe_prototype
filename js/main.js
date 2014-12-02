@@ -8,7 +8,8 @@ $(function() {
         yourEmoeList = $('.yoursEmoes'),                //List of User Emoes
         emoeLevelSet = {},                              //Level Set of Current Emoe
         emoeColorAttachSelect = {},                     //Color of Emoe selected from attach modal
-        emoeNameAttachSelect = {};                      //Name of Emoe selected from attach modal
+        emoeNameAttachSelect = {},                      //Name of Emoe selected from attach modal
+        emoeToAttachArea = $('.to-attach');             //Emoes that will be attached to the message
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -81,10 +82,16 @@ $(function() {
         $(emoeCreateModal).addClass('hidden');
     }
 
-    /*$('.save-attach').on('click', function(){
-        emoeLevelSet = $('.emoe-level-set').css('opacity').substring(0, 4);
-        $('to-attach').append('')
-    });*/
+    //Saves edited emoe and adds it to the "Emoes to Attach" section
+    $('.save-attach').on('click', function(){
+
+        $('.to-attach').append('<div class="emoe-container new-container"></div>');
+
+        var newContainer = $('.new-container');
+        $(newContainer).append($('.emoe-to-attach').html());
+        $(newContainer).find('.emoe-level-set').removeClass('emoe-level-set');
+        $(newContainer).removeClass('new-container');
+    });
 
 
     //Initializes Slider
