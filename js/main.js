@@ -10,7 +10,8 @@ $(function() {
         emoeColorAttachSelect = {},                     //Color of Emoe selected from attach modal
         emoeNameAttachSelect = {},                      //Name of Emoe selected from attach modal
         emoeToAttachArea = $('.to-attach'),             //Emoes that will be attached to the message
-        chatTextarea = $('.chat-textarea');             //Message to send area
+        chatTextarea = $('.chat-textarea'),             //Message to send area
+        messageList = [];                               //List of messages
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -96,7 +97,7 @@ $(function() {
     //Sends message from text message area
     function sendMessage(){
         var newMessage = $(chatTextarea).val();
-        $('#chat-window').append('<div class="message newest-message"><span class="name">You</span></div>');
+        $('#chat-window').append('<div class="message yours newest-message"><span class="name">You</span></div>');
         var newContainer = $('.newest-message').append('<div class="message-container"></div>');
         $(newContainer).append($(emoeToAttachArea).html());
         $(newContainer).append('<span class="message-text">' + newMessage + '</span>');
@@ -104,10 +105,34 @@ $(function() {
         $(newContainer).removeClass('newest-message');
         $(emoeToAttachArea).html('');
         $(chatTextarea).val('');
+
+        shiftMessages();
+
     }
+
+    //Creates messages from other participant
+    function receiveMessage(messageSent){
+        $('#chat-window').append('<div class="message theirs newest-message"><span class="name">HAL 2000</span></div>');
+        var newContainer = $('.newest-message').append('<div class="message-container"></div>');
+        $(newContainer).append($(emoeToAttachArea).html());
+        $(newContainer).append('<span class="message-text">' + messageSent + '</span>');
+
+        $(newContainer).removeClass('newest-message');
+        $(emoeToAttachArea).html('');
+        $(chatTextarea).val('');
+    }
+
+    //Shifts messages down when the reach the bottom of the chat window
+    function shiftMessages(){
+        $('#chat-window').animate({
+            scrollTop: $("#chat-window")[0].scrollHeight
+        }, 3000);
+    }
+
 
     $('.message-send').click(function(){
         sendMessage();
+        shiftMessages();
     });
 
     //Saves emoes from attach modal
@@ -161,5 +186,18 @@ $(function() {
     $('.cancel').on('click', function(){
         closeModal();
         $('.emoe-to-attach').find('.emoe-color').remove();
-    })
+    });
+
+    var blinking = function(){
+        setInterval(function(){
+            $(".typing").toggleClass("blink");
+        },500);
+    };
+
+    /*setTimeout(function(){
+        receiveMessage('This is a test');
+        clearInterval(blinking);
+    }, 4000);*/
+
+    shiftMessages();
 });
