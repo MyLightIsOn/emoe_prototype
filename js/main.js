@@ -16,7 +16,8 @@ $(function() {
         testContent = $('.test-content'),               //Content for each test
         userName = {},                                  //User's name entered in first task.
         nextButton = $('#next'),                        //Next task button
-        messageSend = $('.message-send');               //Send message button
+        messageSend = $('.message-send'),               //Send message button
+        emoeSetLevel = {};                              //Emoe level
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -115,20 +116,31 @@ $(function() {
     }
 
     //Creates messages from other participant
-    function receiveMessage(messageSent){
+    function receiveMessage(messageSent, emoe, emoeLevel){
         $('#chat-window').append('<div class="message theirs newest-message"><span class="name">HAL 2000</span></div>');
-        var newContainer = $('.newest-message').append('<div class="message-container"></div>');
-        $(newContainer).append($(emoeToAttachArea).html());
-        $(newContainer).append('<span class="message-text">' + messageSent + '</span>');
+        var newContainer = {};
+
+        if(!emoe){
+            newContainer = $('.newest-message').append('<div class="message-container"><span class="message-text">' + messageSent + '</span></div>');
+        } else {
+            newContainer = $('.newest-message').append('<div class="message-container"><div class="emoe-container"></div></div>');
+            for(var i = 0; i < emoe.length; ++i){
+                console.log(emoe[i]);
+                $(newContainer).find('.emoe-container').append('<span class="emoe-level" style="opacity: ' + emoeLevel[i] + '"></span><span class="emoe-color ' + emoe[i] +'"></span>');
+
+            }
+            $(newContainer).find('.message-container').append('<span class="message-text">' + messageSent + '</span>')
+        }
 
         $(newContainer).removeClass('newest-message');
+        shiftMessages();
     }
 
     //Shifts messages down when the reach the bottom of the chat window
     function shiftMessages(){
         $('#chat-window').animate({
             scrollTop: $("#chat-window")[0].scrollHeight
-        }, 3000);
+        }, 2000);
     }
 
 
@@ -148,14 +160,17 @@ $(function() {
     }
 
     //When the system reponds to the user, this function sets the message and wait time
-    function messageResponse(message, time){
+    function messageResponse(message, time, emoeColor, emoeLevel){
 
         var typingMessage = setInterval(function(){ blinking() }, 500);
 
         setTimeout(function(){
-            receiveMessage(message);
+            receiveMessage(message, emoeColor, emoeLevel);
             clearInterval(typingMessage);
             $(".typing").addClass('blink')
+
+            emoeColor = [];
+            emoeLevel = []
         }, time);
 
         shiftMessages();
@@ -171,7 +186,7 @@ $(function() {
 
     //Slider for Emoe Attach Level Set
     $(emoeSlider).on( "slide", function() {
-        $('.emoe-level-set').css({
+        emoeSetLevel = $('.emoe-level-set').css({
             opacity: "." + $(emoeSlider).slider('value')
         })
     });
@@ -249,11 +264,15 @@ $(function() {
             $(chatTextarea).val('');
 
             if(userName == 'Sonali'){
-                messageResponse(userName + '! It\'s nice to finally meet Lawrence\'s instructor. Let\'s get started then. Click "Next to continue"', 3000);
+                messageResponse(userName + '! It\'s nice to finally meet Lawrence\'s instructor. Let\'s get started then. Click "Next to continue"', 3000, ['blue','turquoise'], [0.1,0.1]);
                 setTimeout(function(){showNext()}, 3000);
+                $(chatTextarea).css('border','none');
+                $(testContent).html('<p>Fantastic! You\'ve made a new friend. So far, so good. Click "Next" to continue.</p>');
             } else {
-                messageResponse('Nice to meet you ' + userName + '. Let\'s begin! Click "Next to continue"', 3000);
+                messageResponse('Nice to meet you ' + userName + '. Let\'s begin shall we?', 3000,  ['blue','turquoise'], [0.1,0.1]);
                 setTimeout(function(){showNext()}, 3000);
+                $(chatTextarea).css('border','none');
+                $(testContent).html('<p>Fantastic! You\'ve made a new friend. So far, so good. Click "Next" to continue.</p>');
             }
 
             $(messageSend).click(function(){
@@ -269,12 +288,11 @@ $(function() {
 
     function task2(){
         $(testTitle).text('Task 2');
-        $(chatTextarea).css('border','none');
         $(testContent).html('<p>Tell HAL that although you are impressed with his introduction, you really think that computers are not that bright and actually they can only follow instructions.</p>');
         hideNext();
 
         $(messageSend).one('click', function(){
-            messageResponse('What the hell? That\'s a pretty rude way to start a conversation!', 4000);
+            messageResponse('What the hell? That\'s a pretty rude way to start a conversation!', 4000, ['orange'], [0.2]);
             setTimeout(function(){
                 $(testContent).html('<p>HAL sometimes takes itself too seriously. Next, we\'ll let HAL know that you were just joking. At least I hope you were. Click "Next" to continue.</p>');
             }, 4000);
@@ -309,5 +327,43 @@ $(function() {
         $(testTitle).text('Task 4');
         $(testContent).html('<p>Let\'s get that message attached before HAL has a conniption.</p><p>Double click on the emoe you just created. This will open the emoe attach dialog. Place the slider at a level that you think represents your joking nature.</p>');
         hideNext();
+
+        $('.save-attach').one('click', function(){
+            if(emoeSetLevel[0].style.opacity >= 0.6){
+                $(testContent).html('<p>Well, you could be a little more joking than that! Now type that you are just joking in the chat area and hit send. Your emoe will be attached!</p>');
+
+                $(messageSend).one('click', function(){
+                    messageResponse('Doesn\'t sound like it to me. You know what ' + userName + ' you\'re not so great yourself!', 4000, ['orange','red'], [0.1,0.1]);
+                    setTimeout(function(){
+                        $('<p>Well done! Not much longer to go. Click "Next" to continue</p>');
+                        showNext()
+                    }, 4000);
+
+                    $(nextButton).removeClass('task4');
+                    $(nextButton).addClass('task5').one('click',function(){
+                        task5();
+                    });
+                })
+
+            } else {
+                $(testContent).html('<p>That\'s better! I\'m sure that you two will hit it off now. Now type that you are just joking  in the chat area and hit send. Your emoe will be attached!</p>');
+                $(messageSend).one('click', function(){
+                    messageResponse('Ah ok! Well in that case, I forgive you ' + userName + ' .', 4000, ['blue'], [0.1]);
+                    setTimeout(function(){
+                        $('<p>Well done! Not much longer to go. Click "Next" to continue</p>');
+                        showNext()
+                    }, 4000);
+
+                    $(nextButton).removeClass('task4');
+                    $(nextButton).addClass('task5').one('click',function(){
+                        task5();
+                    });
+                })
+            }
+        })
+    }
+
+    function task5(){
+
     }
 });

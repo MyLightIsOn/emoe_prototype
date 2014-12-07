@@ -269,10 +269,10 @@ Chat Styles
 
 .typing {
     position: absolute;
-    bottom: 0;
+    bottom: 228px;
     font-weight: bold;
     font-size: 12px;
-    right: 8px;
+    right: 47px;
     z-index: 2;
 
     -webkit-transition: opacity 0.5s ease-in-out;
