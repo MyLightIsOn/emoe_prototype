@@ -140,6 +140,24 @@ $(function() {
         addEmoesToCue();
     });
 
+    //Sets the blinking typing class
+    function blinking() {
+        $(".typing").toggleClass("blink");
+    }
+
+    //When the system reponds to the user, this function sets the message and wait time
+    function messageResponse(message, time){
+
+        var typingMessage = setInterval(function(){ blinking() }, 500);
+
+        setTimeout(function(){
+            receiveMessage(message);
+            clearInterval(typingMessage);
+        }, time);
+
+        shiftMessages();
+    }
+
 
     //Initializes Slider
     $(emoeSlider).slider({
@@ -188,16 +206,5 @@ $(function() {
         $('.emoe-to-attach').find('.emoe-color').remove();
     });
 
-    var blinking = function(){
-        setInterval(function(){
-            $(".typing").toggleClass("blink");
-        },500);
-    };
-
-    /*setTimeout(function(){
-        receiveMessage('This is a test');
-        clearInterval(blinking);
-    }, 4000);*/
-
-    shiftMessages();
+    messageResponse('test message', 5000);
 });
