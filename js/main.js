@@ -11,7 +11,12 @@ $(function() {
         emoeNameAttachSelect = {},                      //Name of Emoe selected from attach modal
         emoeToAttachArea = $('.to-attach'),             //Emoes that will be attached to the message
         chatTextarea = $('.chat-textarea'),             //Message to send area
-        messageList = [];                               //List of messages
+        messageList = [],                               //List of messages
+        testTitle = $('.test-title'),                   //Title for each test
+        testContent = $('.test-content'),               //Content for each test
+        userName = {},                                  //User's name entered in first task.
+        nextButton = $('#next'),                        //Next task button
+        messageSend = $('.message-send');               //Send message button
 
     //Opens Modal Overlay
     function modalOverlay() {
@@ -104,7 +109,6 @@ $(function() {
 
         $(newContainer).removeClass('newest-message');
         $(emoeToAttachArea).html('');
-        $(chatTextarea).val('');
 
         shiftMessages();
 
@@ -118,8 +122,6 @@ $(function() {
         $(newContainer).append('<span class="message-text">' + messageSent + '</span>');
 
         $(newContainer).removeClass('newest-message');
-        $(emoeToAttachArea).html('');
-        $(chatTextarea).val('');
     }
 
     //Shifts messages down when the reach the bottom of the chat window
@@ -130,7 +132,7 @@ $(function() {
     }
 
 
-    $('.message-send').click(function(){
+    $(messageSend).click(function(){
         sendMessage();
         shiftMessages();
     });
@@ -153,6 +155,7 @@ $(function() {
         setTimeout(function(){
             receiveMessage(message);
             clearInterval(typingMessage);
+            $(".typing").addClass('blink')
         }, time);
 
         shiftMessages();
@@ -206,5 +209,105 @@ $(function() {
         $('.emoe-to-attach').find('.emoe-color').remove();
     });
 
-    messageResponse('test message', 5000);
+
+
+    // User Tests //
+    function hideNext(){
+        $(nextButton).addClass('hidden');
+    }
+    function showNext(){
+        $(nextButton).removeClass('hidden');
+    }
+
+    //Introduction
+    $(testTitle).text('Introduction');
+    $(testContent).html('<p>This area is where you will see accompanying instructions for the user test. At the end of each step, click on the next button below to move on. You will be chatting with HAL 2000 for this test.</p>')
+
+    $('.introduction').one('click', function(){
+        $(testContent).html('<p>While HAL 2000 isn\'t real, it will respond to you as long as you follow the test script.</p><p>At each step, there will be instructions on how to perform each task.</p><p>This test should take you no more than 10 minutes. Please fill out the accompanying documentation as you progress through tasks.</p> <p>Click "Next" below to begin</p>');
+
+        $(this).removeClass('introduction');
+        $(this).addClass('task1');
+
+        $('.task1').one('click',function(){
+            task1();
+        });
+    });
+
+
+
+    function task1(){
+        $(testTitle).text('Task 1');
+        $(chatTextarea).css('border','solid 3px red');
+        $(testContent).html('<p>In a few seconds, HAL will introduce itself and ask your name. Type your responses in the message area. It\'s has been highlighted for you.</p>  <p>For this task, just put your name, by itself, in the message area. HAL will address you by that name for the remainder of the tasks.</p>');
+        hideNext();
+
+        messageResponse('Hello! My name is HAL 2000. What is your name?', 1000);
+
+        $(messageSend).one('click', function(){
+            userName = $(chatTextarea).val();
+            $(chatTextarea).val('');
+
+            if(userName == 'Sonali'){
+                messageResponse(userName + '! It\'s nice to finally meet Lawrence\'s instructor. Let\'s get started then. Click "Next to continue"', 3000);
+                setTimeout(function(){showNext()}, 3000);
+            } else {
+                messageResponse('Nice to meet you ' + userName + '. Let\'s begin! Click "Next to continue"', 3000);
+                setTimeout(function(){showNext()}, 3000);
+            }
+
+            $(messageSend).click(function(){
+                $(chatTextarea).val('');
+            });
+        });
+
+        $(nextButton).removeClass('task1');
+        $(nextButton).addClass('task2').one('click',function(){
+            task2();
+        });
+    }
+
+    function task2(){
+        $(testTitle).text('Task 2');
+        $(chatTextarea).css('border','none');
+        $(testContent).html('<p>Tell HAL that although you are impressed with his introduction, you really think that computers are not that bright and actually they can only follow instructions.</p>');
+        hideNext();
+
+        $(messageSend).one('click', function(){
+            messageResponse('What the hell? That\'s a pretty rude way to start a conversation!', 4000);
+            setTimeout(function(){
+                $(testContent).html('<p>HAL sometimes takes itself too seriously. Next, we\'ll let HAL know that you were just joking. At least I hope you were. Click "Next" to continue.</p>');
+            }, 4000);
+            setTimeout(function(){showNext()}, 4000);
+            $(nextButton).removeClass('task2');
+            $(nextButton).addClass('task3').one('click',function(){
+                task3();
+            });
+        });
+    }
+
+    function task3(){
+        $(testTitle).text('Task 3');
+        $(testContent).html('<p>First you need to create an emoe. Click on the "Create Emoe" button. It is highlighted for you.</p><p>This will open the emoe create dialog. Select any color and name your emoe "Joking".</p>');
+        $('.create-emoe').css('border','solid 3px red');
+        hideNext();
+
+        $('.save-create').one('click', function(){
+            $(testContent).html('<p>Great! You\'ve created your first emoe. Next, we\'ll attach it so HAL can stop being so offended.</p><p>Click "Next" to continue</p>');
+
+            $('.create-emoe').css('border','none');
+            showNext();
+
+            $(nextButton).removeClass('task3');
+            $(nextButton).addClass('task4').one('click',function(){
+                task4();
+            });
+        });
+    }
+
+    function task4(){
+        $(testTitle).text('Task 4');
+        $(testContent).html('<p>Let\'s get that message attached before HAL has a conniption.</p><p>Double click on the emoe you just created. This will open the emoe attach dialog. Place the slider at a level that you think represents your joking nature.</p>');
+        hideNext();
+    }
 });

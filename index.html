@@ -15,49 +15,69 @@
         <link rel="stylesheet" href="css/myStyles.css">
     </head>
     <body>
+        <div id="main-container">
+            <div id="container">
+                <div id="emoe-list-container__left">
+                    <h3>Your Emoes</h3>
+                    <div class="emoe-list yoursEmoes">
 
-        <div id="container">
-            <div id="emoe-list-container__left">
-                <h3>Your Emoes</h3>
-                <div class="emoe-list yoursEmoes">
-                    <div class="emoe">
-                        <span class="emoe-color happy"></span>
-                        <span class="emoe-name">Happy</span>
                     </div>
+                    <button class="create-emoe">+ Create Emoe</button>
                 </div>
-                <button class="create-emoe">+ Create Emoe</button>
-            </div>
-            <div id="chat-container">
-                <div id="chat-window">
-                    <div class="typing">
-                        HAL 2000 is Typing
-                    </div>
+                <div id="chat-container">
+                    <div id="chat-window">
+                        <div class="typing blink">
+                            HAL 2000 is Typing
+                        </div>
 
-                </div>
-                <div id="chat-interface">
-                    <textarea class="chat-textarea" placeholder="Type Message Here"></textarea>
-                    <div class="button-cluster">
-                        <button class="emoe-attach"></button>
-                        <button class="chat-lock lock"></button>
-                        <button class="message-send">SEND</button>
                     </div>
-                    <span class="to-attach"></span>
+                    <div id="chat-interface">
+                        <textarea class="chat-textarea" placeholder="Type Message Here"></textarea>
+                        <div class="button-cluster">
+                            <button class="emoe-attach"></button>
+                            <button class="chat-lock lock"></button>
+                            <button class="message-send">SEND</button>
+                        </div>
+                        <span class="to-attach"></span>
+                    </div>
+                </div>
+                <div id="emoe-list-container__right">
+                    <h3>HAL 2000's Emoes</h3>
+                    <div class="emoe-list">
+                        <div class="emoe">
+                            <span class="emoe-color blue"></span>
+                            <span class="emoe-name">Happy</span>
+                        </div>
+                        <div class="emoe">
+                            <span class="emoe-color red"></span>
+                            <span class="emoe-name">Angry</span>
+                        </div>
+                        <div class="emoe">
+                            <span class="emoe-color lime"></span>
+                            <span class="emoe-name">Joking</span>
+                        </div>
+                        <div class="emoe">
+                            <span class="emoe-color orange"></span>
+                            <span class="emoe-name">Annoyed</span>
+                        </div>
+                        <div class="emoe">
+                            <span class="emoe-color purple"></span>
+                            <span class="emoe-name">Sarcasm</span>
+                        </div>
+                        <div class="emoe">
+                            <span class="emoe-color turquoise"></span>
+                            <span class="emoe-name">Excited</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="emoe-list-container__right">
-                <h3>Their Emoes</h3>
-                <div class="emoe-list">
-                    <div class="emoe">
-                        <span class="emoe-color happy"></span>
-                        <span class="emoe-name">Happy</span>
-                    </div>
-                    <div class="emoe">
-                        <span class="emoe-color happy"></span>
-                        <span class="emoe-name">Happy</span>
-                    </div>
-                </div>
+            <div id="instructions">
+                <span class="test-title"></span>
+                <div class="test-content"></div>
+                <button id="next" class="introduction">Next</button>
             </div>
         </div>
+
 
         <div class="emoe-attach-modal hidden">
             <div class="emoe-attach-title"></div>

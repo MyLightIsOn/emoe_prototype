@@ -20,6 +20,13 @@ body, html {
     opacity: 0.6;
     z-index: -10;
 }
+
+#main-container {
+    width: 1200px;
+
+    margin: 0 auto;
+}
+
 /***************************************************
 Chat Structure
 ****************************************************/
@@ -29,6 +36,7 @@ Chat Structure
     height: 525px;
     margin: 0 auto;
 
+    float: left;
     background-color: #2f96b4;
 }
 
@@ -82,7 +90,7 @@ Interface Area
 .chat-textarea {
     width: 300px;
     height: 100px;
-    display: bl;
+    display: block;
     float: left;
 
     margin: 20px 0 0 20px;
@@ -404,12 +412,39 @@ Emoe Create Modal
 }
 
 /***************************************************
-Emoe List
+Instructions
 ****************************************************/
 
-.happy {
-    background-color: blue;
+#instructions {
+    width: 300px;
+    height: 525px;
+
+    float: right;
+    padding: 20px;
+    position: relative;
+
+    background-color: #E3E3E3;
 }
+
+.test-title {
+    font-weight: bold;
+}
+
+#next {
+    width: 100px;
+    height: 50px;
+
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+
+    cursor: pointer;
+}
+
+/***************************************************
+Emoe List
+****************************************************/
 
 .blue {
     background-color: blue;
