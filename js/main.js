@@ -257,7 +257,7 @@ $(function() {
         $(testContent).html('<p>In a few seconds, HAL will introduce itself and ask your name. Type your responses in the message area. It\'s has been highlighted for you.</p>  <p>For this task, just put your name, by itself, in the message area. HAL will address you by that name for the remainder of the tasks.</p>');
         hideNext();
 
-        messageResponse('Hello! My name is HAL 2000. What is your name?', 1000);
+        messageResponse('Hello! My name is HAL 2000. What is your name?', 8000);
 
         $(messageSend).one('click', function(){
             userName = $(chatTextarea).val();
@@ -292,7 +292,7 @@ $(function() {
         hideNext();
 
         $(messageSend).one('click', function(){
-            messageResponse('What the hell? That\'s a pretty rude way to start a conversation!', 4000, ['orange'], [0.2]);
+            messageResponse('What the hell? That\'s a pretty rude way to start a conversation!', 4000, ['orange'], [0.6]);
             setTimeout(function(){
                 $(testContent).html('<p>HAL sometimes takes itself too seriously. Next, we\'ll let HAL know that you were just joking. At least I hope you were. Click "Next" to continue.</p>');
             }, 4000);
@@ -348,7 +348,7 @@ $(function() {
             } else {
                 $(testContent).html('<p>That\'s better! I\'m sure that you two will hit it off now. Now type that you are just joking  in the chat area and hit send. Your emoe will be attached!</p>');
                 $(messageSend).one('click', function(){
-                    messageResponse('Ah ok! Well in that case, I forgive you ' + userName + ' .', 4000, ['blue'], [0.1]);
+                    messageResponse('Ah ok! Well ' + userName + ' in that case, I forgive you.', 4000, ['blue'], [0.1]);
                     setTimeout(function(){
                         $('<p>Well done! Not much longer to go. Click "Next" to continue</p>');
                         showNext()
@@ -364,6 +364,30 @@ $(function() {
     }
 
     function task5(){
+        $(testTitle).text('Task 5');
+        $(testContent).html('<p>Now it\'s your turn to express outrage!</p><p>Create and attach two negative response emoes to your next message and let HAL know that his sarcasm is lame.</p>');
+        hideNext();
 
+        messageResponse('Besides, I have already put a virus on your computer so we are even now.', 6000, ['lime','purple'], [0.1],[0.5]);
+
+        $(messageSend).one('click',function(){
+            messageResponse('Geez! Lighten up! I didn\'t do anything to your computer', 4000, ['lime'], [0.1]);
+            setTimeout(function(){
+                $(testContent).html('<p>You have cleared that up. Good thing! It could\'ve gotten ugly.</p>');
+                showNext();
+            }, 4000);
+
+            $(nextButton).removeClass('task5');
+            $(nextButton).addClass('task6').one('click',function(){
+                task6();
+            });
+        });
+    }
+
+    function task6(){
+        $(testTitle).text('Conclusion');
+        $(testContent).html('<p>You have completed the user test. Please fill out the remainder of the evaluation survey.</p>');
+        messageResponse('Thanks ' + userName + ' for your time. Your responses will be very valuble to this study.', 4000, ['blue'], [0.1]);
+        hideNext();
     }
 });
